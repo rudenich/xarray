@@ -119,13 +119,14 @@ class XArray{
 
 
     public function donate($a,$b,$config=array()){
-        if(empty($config)){
-            $config = array('fields'=>array(),'map'=>array());
-        }
+        $config = $this->merge($config,array('fields'=>array(),'map'=>array()));
         $temp = array();
         foreach($config['fields'] as $field){
-            if(($mapData = $config['map'][$field])!=null){
-                $temp[$mapData] = $b[$field];
+            //if((@$mapData = $config['map'][$field])!=null){
+            if(isset($config['map'][$field])){
+                $temp[$config['map'][$field]] = $b[$field];
+            }else{
+                $temp[$field] = $b[$field];
             }
         }
 
