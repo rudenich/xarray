@@ -116,4 +116,19 @@ class XArray{
         }
         return $res;
     }
+
+
+    public function donate($a,$b,$config=array()){
+        if(empty($config)){
+            $config = array('fields'=>array(),'map'=>array());
+        }
+        $temp = array();
+        foreach($config['fields'] as $field){
+            if(($mapData = $config['map'][$field])!=null){
+                $temp[$mapData] = $b[$field];
+            }
+        }
+
+        return $this->merge($a,$temp);
+    }
 }
